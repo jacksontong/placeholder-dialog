@@ -1,0 +1,22 @@
+{
+  "name": "placeholder dialog",
+  "authors": [
+    "Jackson Tong <jackson@snapfrozen.com.au>"
+  ],
+  "description": "a ckeditor placeholder plugin",
+  "main": "plugin.js",
+  "keywords": [
+    "ckeditor",
+    "placeholder",
+    "dialog"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
