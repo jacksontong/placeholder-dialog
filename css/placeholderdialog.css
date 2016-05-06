@@ -1,0 +1,9 @@
+#placeholder-list a {
+    display: block;
+}
+#placeholder-list a:hover {
+    background-color: #a8a8a8;
+}
+#placeholder-list a.active {
+    background-color: #7e7e7e;
+}

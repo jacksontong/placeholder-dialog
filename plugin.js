@@ -31,6 +31,7 @@
                 }
             });
 
+            CKEDITOR.document.appendStyleSheet(CKEDITOR.plugins.getPath('placeholder_dialog') + '/css/placeholderdialog.css');
         },
         afterInit: function( editor ) {
             var placeholderReplaceRegex = /\[\[([^\[\]])+\]\]/g;

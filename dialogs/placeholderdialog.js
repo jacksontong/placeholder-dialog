@@ -1,28 +1,38 @@
 'use strict';
 
-function validateGroups(original_group, msg) {
-	return function() {
-		var value = this.getValue();
-		var pass = original_group.indexOf(value) !== -1;
+function setPlaceholder(event) {
+	document.getElementsByClassName('placeholderName')[0].getElementsByTagName('input')[0].value = event.getAttribute('title');
+	var placeholderList = document.getElementById('placeholder-list');
+	var elements = placeholderList.getElementsByTagName('a');
 
-		if (!pass) {
-			return msg;
+	for (var i = 0; i < elements.length; i++) {
+		elements[i].className = '';
+	}
+
+	event.className += 'active';
+}
+
+function search(text) {
+	var placeholderList = document.getElementById('placeholder-list');
+	var elements = placeholderList.getElementsByTagName('a');
+
+	for (var i = 0; i < elements.length; i++) {
+		var currentElement = elements[i];
+		var title = currentElement.getAttribute('title');
+
+		if (title && title.match(new RegExp(text, 'i')) !== null) {
+			currentElement.style.display = 'block';
+		} else {
+			currentElement.style.display = 'none';
 		}
-	};
+	}
 }
 
 CKEDITOR.dialog.add( 'placeholderdialog', function( editor ) {
 	var validNameRegex = /^[^\[\]<>]+$/;
-	var config = editor.config.placeholder_dialog.placeholders;
-	var groups = config.map(function(obj) {
-		return [obj.group];
-	}).concat([['All']]);
-	var placeholders = [];
-
-	config.forEach(function(obj) {
-		obj.placeholders.forEach(function(currentValue) {
-			placeholders.push([currentValue.label, currentValue.value]);
-		});
+	var placeholderList = editor.config.placeholder_dialog.map(function(val) {
+		return '<a href="javascript:void(0)" onclick="setPlaceholder(this); return false;" title="'+ 
+			val.label +'">' + val.value + '</a>';
 	});
 
 
@@ -37,33 +47,44 @@ CKEDITOR.dialog.add( 'placeholderdialog', function( editor ) {
 				title: 'Groups',
 				elements: [
 					{
-						type: 'select',
-						id: 'placeholderGroupsList',
-						label: 'Groups',
-						items: groups,
-						style: 'width: 150px',
-						default: 'All',
-						validate: validateGroups(config.map(function(obj) {
-							return obj.group;
-						}).concat(['All']), 'Invalid placeholder group member')
+						type: 'text',
+						id: 'placeholderSearch',
+						className: 'placeholderSearch',
+						label: 'Search',
+						onKeyUp: function(e) {
+							search(e.sender.$.value);
+						}
 					},
 					{
-						type: 'select',
-						id: 'placeholderListAll',
-						label: 'Placeholders',
-						style: 'width: 595px; height: 300px;',
-						size: 10,
-						items: placeholders,
-						validate: CKEDITOR.dialog.validate.regex( validNameRegex, 'The placeholder can not be empty and can not contain any of following characters: [, ], <, >' ),
+						type: 'text',
+						id: 'placeholderName',
+						className: 'placeholderName',
+						style: 'display: none;',
+						required: true,
+						'default': '',
+						validate: CKEDITOR.dialog.validate.regex( validNameRegex, 'Invalid Placeholder' ),
 						setup: function( widget ) {
 							this.setValue( widget.data.name );
 						},
 						commit: function( widget ) {
 							widget.setData( 'name', this.getValue() );
 						}
+					},
+					{
+						type: 'html',
+						html: '<div id="placeholder-list">'+ placeholderList.join("\n") +'</div>'
 					}
 				]
 			}
-		]
+		],
+		onOk: function() {
+			var placeholderList = document.getElementById('placeholder-list');
+			var elements = placeholderList.getElementsByTagName('a');
+
+			for (var i = 0; i < elements.length; i++) {
+				elements[i].className = '';
+				elements[i].style.display = 'block';
+			}
+		}
 	};
 } );
