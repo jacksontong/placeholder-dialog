@@ -28,6 +28,16 @@ function search(text) {
 	}
 }
 
+function initializeList() {
+	var placeholderList = document.getElementById('placeholder-list');
+	var elements = placeholderList.getElementsByTagName('a');
+
+	for (var i = 0; i < elements.length; i++) {
+		elements[i].className = '';
+		elements[i].style.display = 'block';
+	}
+}
+
 CKEDITOR.dialog.add( 'placeholder2', function( editor ) {
 	var validNameRegex = /^[^\[\]<>]+$/;
 	var placeholderList = editor.config.placeholder2.map(function(val) {
@@ -78,13 +88,10 @@ CKEDITOR.dialog.add( 'placeholder2', function( editor ) {
 			}
 		],
 		onOk: function() {
-			var placeholderList = document.getElementById('placeholder-list');
-			var elements = placeholderList.getElementsByTagName('a');
-
-			for (var i = 0; i < elements.length; i++) {
-				elements[i].className = '';
-				elements[i].style.display = 'block';
-			}
+			initializeList();
+		},
+		onCancel: function() {
+			initializeList();
 		}
 	};
 } );
