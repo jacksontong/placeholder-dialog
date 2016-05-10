@@ -1,9 +1,9 @@
 'use strict';
 
 (function() {
-    CKEDITOR.plugins.add('placeholder_dialog', {
+    CKEDITOR.plugins.add('placeholder2', {
         requires: ['widget', 'dialog'],
-        icons: 'placeholderdialog',
+        icons: 'placeholder2',
         hipdi: true,
 
         onLoad: function() {
@@ -13,12 +13,12 @@
         init: function(editor) {
 
             // Register dialog.
-            CKEDITOR.dialog.add( 'placeholderdialog', this.path + 'dialogs/placeholderdialog.js' );
+            CKEDITOR.dialog.add( 'placeholder2', this.path + 'dialogs/placeholder2.js' );
 
-            editor.widgets.add('PlaceholderDialog', {
+            editor.widgets.add('placeholder2', {
                 button: 'Insert A Placeholder',
                 template: '<span class="cke_placeholder">[[]]</span>',
-                dialog: 'placeholderdialog',
+                dialog: 'placeholder2',
                 downcast: function() {
                     return new CKEDITOR.htmlParser.text( '[[' + this.data.name + ']]' );
                 },
@@ -31,7 +31,7 @@
                 }
             });
 
-            CKEDITOR.document.appendStyleSheet(CKEDITOR.plugins.getPath('placeholder_dialog') + '/css/placeholderdialog.css');
+            CKEDITOR.document.appendStyleSheet(CKEDITOR.plugins.getPath('placeholder2') + '/css/placeholder2.css');
         },
         afterInit: function( editor ) {
             var placeholderReplaceRegex = /\[\[([^\[\]])+\]\]/g;
@@ -54,7 +54,7 @@
 
                         // Adds placeholder identifier as innertext.
                         innerElement.add( new CKEDITOR.htmlParser.text( match ) );
-                        widgetWrapper = editor.widgets.wrapElement( innerElement, 'placeholder_dialog' );
+                        widgetWrapper = editor.widgets.wrapElement( innerElement, 'placeholder2' );
 
                         // Return outerhtml of widget wrapper so it will be placed
                         // as replacement.

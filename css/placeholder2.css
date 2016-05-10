@@ -1,3 +1,7 @@
+#placeholder-list {
+    overflow: auto;
+    height: 330px;
+}
 #placeholder-list a {
     display: block;
 }
