@@ -95,4 +95,4 @@ CKEDITOR.dialog.add( 'placeholder2', function( editor ) {
 			initializeList();
 		}
 	};
-} );
+});

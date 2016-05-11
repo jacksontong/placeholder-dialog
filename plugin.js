@@ -59,9 +59,9 @@
                         // Return outerhtml of widget wrapper so it will be placed
                         // as replacement.
                         return widgetWrapper.getOuterHtml();
-                    } );
+                    });
                 }
-            } );
+            });
         }
     });
 })();
