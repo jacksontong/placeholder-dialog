@@ -42,7 +42,7 @@ CKEDITOR.dialog.add( 'placeholder2', function( editor ) {
 	var validNameRegex = /^[^\[\]<>]+$/;
 	var placeholderList = editor.config.placeholder2.map(function(val) {
 		return '<a href="javascript:void(0)" onclick="setPlaceholder(this); return false;" title="'+ 
-			val.label +'">' + val.value + '</a>';
+			val.value +'">' + val.label + '</a>';
 	});
 
 
