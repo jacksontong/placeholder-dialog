@@ -19,8 +19,9 @@ function search(text) {
 	for (var i = 0; i < elements.length; i++) {
 		var currentElement = elements[i];
 		var title = currentElement.getAttribute('title');
+		var label = currentElement.innerHTML.toString();
 
-		if (title && title.match(new RegExp(text, 'i')) !== null) {
+		if (title && title.match(new RegExp(text, 'i')) !== null || label.match(new RegExp(text, 'i')) !== null) {
 			currentElement.style.display = 'block';
 		} else {
 			currentElement.style.display = 'none';
