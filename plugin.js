@@ -34,7 +34,11 @@
             CKEDITOR.document.appendStyleSheet(CKEDITOR.plugins.getPath('placeholder2') + '/css/placeholder2.css');
         },
         afterInit: function( editor ) {
-            var placeholderReplaceRegex = /\[\[([^\[\]])+\]\]/g;
+            var matches = editor.config.placeholder2.map(function(placeholder) {
+                return placeholder.value.replace(/[\\\^\$\*\+\?\.\(\)\|\{\}\[\]]/g, '\\$&');
+            });
+            var pattern = '(\\[\\[(' + matches.join('|') + ')\\]\\])';
+            var placeholderReplaceRegex = new RegExp(pattern, 'g');
 
             editor.dataProcessor.dataFilter.addRules( {
                 text: function( text, node ) {
