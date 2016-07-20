@@ -41,7 +41,7 @@ function initializeList() {
 
 CKEDITOR.dialog.add( 'placeholder2', function( editor ) {
 	var validNameRegex = /^[^\[\]<>]+$/;
-	var placeholderList = editor.config.placeholder2.map(function(placeholder) {
+	var placeholderList = editor.config.placeholder2.placeholders.map(function(placeholder) {
 		return '<a href="javascript:void(0)" onclick="setPlaceholder(this); return false;" title="'+
 			placeholder.value +'">' + placeholder.label + '</a>';
 	});

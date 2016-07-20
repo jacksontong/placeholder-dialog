@@ -16,7 +16,6 @@
             CKEDITOR.dialog.add( 'placeholder2', this.path + 'dialogs/placeholder2.js' );
 
             editor.widgets.add('placeholder2', {
-                button: 'Insert A Placeholder',
                 template: '<span class="cke_placeholder">[[]]</span>',
                 dialog: 'placeholder2',
                 downcast: function() {
@@ -31,10 +30,16 @@
                 }
             });
 
+            editor.ui.addButton('placeholder2', {
+                label: editor.config.placeholder2.toolbarLabel,
+                command: 'placeholder2',
+                toolbar: 'document,11'
+            } );
+
             CKEDITOR.document.appendStyleSheet(CKEDITOR.plugins.getPath('placeholder2') + '/css/placeholder2.css');
         },
         afterInit: function( editor ) {
-            var matches = editor.config.placeholder2.map(function(placeholder) {
+            var matches = editor.config.placeholder2.placeholders.map(function(placeholder) {
                 return placeholder.value.replace(/[\\\^\$\*\+\?\.\(\)\|\{\}\[\]]/g, '\\$&');
             });
             var pattern = '(\\[\\[(' + matches.join('|') + ')\\]\\])';

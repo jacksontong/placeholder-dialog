@@ -11,3 +11,18 @@
 #placeholder-list a.active {
     background-color: #7e7e7e;
 }
+
+.cke_button__placeholder2_label {
+    display: inline;
+    color: white;
+}
+
+a.cke_button__placeholder2 {
+    color: #fff;
+    border-color: #2274c9 !important;
+    background: #3f8edf !important;
+}
+a.cke_button__placeholder2:hover, a.cke_button__placeholder2:active, a.cke_button__placeholder2:focus {
+    border-color: #1e68b4 !important;
+    background: #2981db !important;
+}
