@@ -33,7 +33,7 @@
             editor.ui.addButton('placeholder2', {
                 label: editor.config.placeholder2.toolbarLabel,
                 command: 'placeholder2',
-                toolbar: 'document,11'
+                toolbar: 'insert'
             } );
 
             CKEDITOR.document.appendStyleSheet(CKEDITOR.plugins.getPath('placeholder2') + '/css/placeholder2.css');
