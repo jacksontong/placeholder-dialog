@@ -39,7 +39,7 @@ The following options are available for configuration:
 ```js
 config.placeholder2 = {
     placeholders: [
-        {label: 'Placeholder 1', value: 'Placeholder 1'},
+        {label: 'Placeholder 1', value: 'Placeholder 1', regex: 'Placeholder 1(\syear=1)?'},
         {label: 'Placeholder 2', value: 'Placeholder 2'}
     ],
     toolbarLabel: 'Placeholder'

@@ -40,7 +40,11 @@
         },
         afterInit: function( editor ) {
             var matches = editor.config.placeholder2.placeholders.map(function(placeholder) {
-                return placeholder.value.replace(/[\\\^\$\*\+\?\.\(\)\|\{\}\[\]]/g, '\\$&');
+                if (placeholder.regex) {
+                    return placeholder.regex
+                }
+
+                return placeholder.value.replace(/[\\\^\$\*\+\?\.\(\)\|\{\}\[\]]/g, '\\$&')
             });
             var pattern = '(\\[\\[(' + matches.join('|') + ')\\]\\])';
             var placeholderReplaceRegex = new RegExp(pattern, 'g');
