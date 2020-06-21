@@ -39,11 +39,11 @@ function initializeList() {
 	}
 }
 
-CKEDITOR.dialog.add( 'placeholder2', function( editor ) {
+CKEDITOR.dialog.add('placeholder2', function (editor) {
 	var validNameRegex = /^[^\[\]]+$/;
-	var placeholderList = editor.config.placeholder2.placeholders.map(function(placeholder) {
-		return '<a href="javascript:void(0)" onclick="setPlaceholder(this); return false;" title="'+
-			placeholder.value +'">' + placeholder.label + '</a>';
+	var placeholderList = editor.config.placeholder2.placeholders.map(function (placeholder) {
+		return '<a href="javascript:void(0)" onclick="setPlaceholder(this); return false;" title="' +
+			placeholder.value + '">' + placeholder.label + (placeholder.display_value ? ' | ' + placeholder.display_value : '') + '</a>';
 	});
 
 
@@ -62,7 +62,7 @@ CKEDITOR.dialog.add( 'placeholder2', function( editor ) {
 						id: 'placeholderSearch',
 						className: 'placeholderSearch',
 						label: 'Search',
-						onKeyUp: function(e) {
+						onKeyUp: function (e) {
 							search(e.sender.$.value);
 						}
 					},
@@ -73,25 +73,25 @@ CKEDITOR.dialog.add( 'placeholder2', function( editor ) {
 						style: 'display: none;',
 						required: true,
 						'default': '',
-						validate: CKEDITOR.dialog.validate.regex( validNameRegex, 'Invalid Placeholder' ),
-						setup: function( widget ) {
-							this.setValue( widget.data.name );
+						validate: CKEDITOR.dialog.validate.regex(validNameRegex, 'Invalid Placeholder'),
+						setup: function (widget) {
+							this.setValue(widget.data.name);
 						},
-						commit: function( widget ) {
-							widget.setData( 'name', this.getValue() );
+						commit: function (widget) {
+							widget.setData('name', this.getValue());
 						}
 					},
 					{
 						type: 'html',
-						html: '<div id="placeholder-list">'+ placeholderList.join("\n") +'</div>'
+						html: '<div id="placeholder-list">' + placeholderList.join("\n") + '</div>'
 					}
 				]
 			}
 		],
-		onOk: function() {
+		onOk: function () {
 			initializeList();
 		},
-		onCancel: function() {
+		onCancel: function () {
 			initializeList();
 		}
 	};
